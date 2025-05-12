@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GroceryScout - Indian Grocery Shopping</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-image"><img id = "logo-img"src="https://th.bing.com/th/id/OIP.9bT8xotHjCgV0L46_hv7MQHaHa?rs=1&pid=ImgDetMain"></div>
+
+            <div class="logo">
+                <h1>GroceryScout</h1>
+                <p>Your AI-Powered Grocery Assistant</p>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search for groceries...">
+                <button id="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="nav-icons">
+                <div class="location-selector">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span id="current-location">Pune</span>
+                    <i class="fas fa-chevron-down"></i>
+                    <div class="location-dropdown" id="location-dropdown">
+                        <div class="location-search">
+                            <input type="text" id="location-search-input" placeholder="Search location...">
+                        </div> 
+                        <ul class="location-list">
+                            <li data-location="Pune">Pune</li>
+                            <li data-location="Delhi">Delhi</li>
+                            <li data-location="Bangalore">Bangalore</li>
+                            <li data-location="Hyderabad">Hyderabad</li>
+                            <li data-location="Chennai">Chennai</li>
+                            <li data-location="Kolkata">Kolkata</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cart-icon" id="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul class="category-nav">
+                <li data-category="all" class="active">All</li>
+                <li data-category="fruits">Fruits & Vegetables</li>
+                <li data-category="dairy">Dairy & Eggs</li>
+                <li data-category="spices">Spices & Masalas</li>
+                <li data-category="grains">Rice & Grains</li>
+                <li data-category="snacks">Snacks</li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <div class="main-content">
+                <section class="products-section">
+                    <h2 id="products-heading">All Products</h2>
+                    <div class="products-grid" id="products-grid">
+                        <!-- Products will be loaded here dynamically -->
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <div class="ai-assistant-button" id="ai-assistant-button">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <div class="ai-assistant-modal" id="ai-assistant-modal">
+        <div class="modal-header">
+            <h3>AI Recipe Assistant</h3>
+            <button id="close-assistant"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-body">
+            <p>Tell me what dish you'd like to make and for how many people:</p>
+            <div class="recipe-input">
+                <input type="text" id="dish-input" placeholder="e.g., Butter Chicken">
+                <div class="serving-selector">
+                    <label for="serving-input">Servings:</label>
+                    <input type="number" id="serving-input" min="1" value="4">
+                </div>
+                <button id="generate-recipe-btn">Generate Recipe</button>
+            </div>
+            <div class="recipe-result" id="recipe-result">
+                <!-- Recipe will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button id="close-cart"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be displayed here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total">₹0.00</span>
+            </div>
+            <button id="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>GroceryScout</h3>
+                    <p>Your AI-powered grocery shopping assistant for the Indian market.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#recipes">Recipes</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-phone"></i> +91 9876543210</p>
+                    <p><i class="fas fa-envelope"></i> support@GroceryScout.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 GroceryScout. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="database.js"></script>
+    <script src="main.js"></script>
+    <script src="ai-assistant.js"></script>
+
+    <div style="position: fixed; bottom: 10px; left: 10px; background: #f0f0f0; padding: 10px; border-radius: 5px; z-index: 9999; display: none;" id="debug-panel">
+        <h4 style="margin-top: 0;">Debug Controls</h4>
+        <button onclick="window.openAIAssistant()">Force Open Assistant</button>
+        <button onclick="console.log('DOM Elements:', {aiButton: document.getElementById('ai-assistant-button'), aiModal: document.getElementById('ai-assistant-modal')})">Check Elements</button>
+        <button onclick="document.getElementById('debug-panel').style.display = 'none';">Close</button>
+    </div>
+
+    <script>
+        // Show debug panel with Ctrl+Shift+D
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+                const debugPanel = document.getElementById('debug-panel');
+                debugPanel.style.display = debugPanel.style.display === 'none' ? 'block' : 'none';
+            }
+        });
+    </script>
+</body>
+</html>
