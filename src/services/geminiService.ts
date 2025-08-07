@@ -2,7 +2,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Use the provided API key
-const API_KEY = "AIzaSyD-dbOMgzALwH8mXvUvOJPLXjLElMTcQAU"; 
+const API_KEY = "ADD   YOUR OWN API KEY"; 
 
 // Initialize the Gemini API
 const getGenAI = () => {
